@@ -1,0 +1,483 @@
+
+{
+  "header": {
+    "reportVersion": 2,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200818.153323.6086.0.001.json",
+    "dumpEventTime": "2020-08-18T15:33:23Z",
+    "dumpEventTimeStamp": "1597775603079",
+    "processId": 6086,
+    "threadId": null,
+    "cwd": "/home/manuki/Documentos/projetos/DotA2/node",
+    "commandLine": [
+      "/home/manuki/.nvm/versions/node/v12.16.3/bin/node",
+      "-r",
+      "/tmp/ts-node-dev-hook-14681894087917735.js",
+      "--inspect",
+      "/home/manuki/Documentos/projetos/DotA2/node/node_modules/ts-node-dev/lib/wrap.js",
+      "src/server.ts"
+    ],
+    "nodejsVersion": "v12.16.3",
+    "glibcVersionRuntime": "2.27",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "12.16.3",
+      "v8": "7.8.279.23-node.35",
+      "uv": "1.34.2",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.16.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1g",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "5.4.0-42-generic",
+    "osVersion": "#46~18.04.1-Ubuntu SMP Fri Jul 10 07:21:24 UTC 2020",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz",
+        "speed": 3285,
+        "user": 581000,
+        "nice": 0,
+        "sys": 102200,
+        "idle": 7495800,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz",
+        "speed": 3201,
+        "user": 502100,
+        "nice": 0,
+        "sys": 124000,
+        "idle": 7507400,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz",
+        "speed": 3201,
+        "user": 534500,
+        "nice": 600,
+        "sys": 91200,
+        "idle": 7474400,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz",
+        "speed": 3201,
+        "user": 533400,
+        "nice": 300,
+        "sys": 105300,
+        "idle": 7641000,
+        "irq": 0
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "eno1",
+        "internal": false,
+        "mac": "7c:05:07:d2:3d:36",
+        "address": "192.168.1.101",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "docker0",
+        "internal": false,
+        "mac": "02:42:2e:ca:95:50",
+        "address": "172.17.0.1",
+        "netmask": "255.255.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "eno1",
+        "internal": false,
+        "mac": "7c:05:07:d2:3d:36",
+        "address": "fe80::b097:ff02:383c:3f4",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 2
+      },
+      {
+        "name": "docker0",
+        "internal": false,
+        "mac": "02:42:2e:ca:95:50",
+        "address": "fe80::42:2eff:feca:9550",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 3
+      },
+      {
+        "name": "veth9fba01f",
+        "internal": false,
+        "mac": "ce:b9:20:08:0c:f6",
+        "address": "fe80::ccb9:20ff:fe08:cf6",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 5
+      }
+    ],
+    "host": "manuki-pc"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000b46955",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000a09c8f",
+      "symbol": "node::OnFatalError(char const*, char const*) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b7d71e",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b7da99",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d2a1f5",
+      "symbol": " [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d2a886",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d37105",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d37fb5",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d3aa6c",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d0163b",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x000000000104316c",
+      "symbol": "v8::internal::Runtime_AllocateInOldGeneration(int, unsigned long*, v8::internal::Isolate*) [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    },
+    {
+      "pc": "0x00000000013c5b79",
+      "symbol": " [/home/manuki/.nvm/versions/node/v12.16.3/bin/node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2226102272,
+    "totalCommittedMemory": 2223605488,
+    "usedMemory": 2221408016,
+    "availableMemory": 2094912,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 33088,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 2097152,
+        "committedMemory": 2240,
+        "capacity": 1047456,
+        "used": 0,
+        "available": 1047456
+      },
+      "old_space": {
+        "memorySize": 1619140608,
+        "committedMemory": 1619091168,
+        "capacity": 1617199240,
+        "used": 1617199240,
+        "available": 0
+      },
+      "code_space": {
+        "memorySize": 430080,
+        "committedMemory": 310432,
+        "capacity": 228512,
+        "used": 228512,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 790528,
+        "committedMemory": 786800,
+        "capacity": 641120,
+        "used": 641120,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 603332608,
+        "committedMemory": 603332608,
+        "capacity": 603303552,
+        "used": 603303552,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047456,
+        "used": 0,
+        "available": 1047456
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 29.3563,
+    "kernelCpuSeconds": 1.84404,
+    "cpuConsumptionPercent": 156.002,
+    "maxRss": 3642609664,
+    "pageFaults": {
+      "IORequired": 9,
+      "IONotRequired": 1163333
+    },
+    "fsActivity": {
+      "reads": 15712,
+      "writes": 88
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 9.98691,
+    "kernelCpuSeconds": 1.07132,
+    "cpuConsumptionPercent": 55.2911,
+    "fsActivity": {
+      "reads": 15712,
+      "writes": 88
+    }
+  },
+  "libuv": [
+  ],
+  "workers": [
+  ],
+  "environmentVariables": {
+    "npm_package_devDependencies_ts_node": "3.3.0",
+    "npm_package_devDependencies__types_supertest": "^2.0.8",
+    "SPACESHIP_ROOT": "/home/manuki/.oh-my-zsh/custom/themes/spaceship-prompt",
+    "npm_package_devDependencies__types_express_serve_static_core": "4.17.2",
+    "LANGUAGE": "pt_BR:pt:en",
+    "USER": "manuki",
+    "npm_package_devDependencies_jest": "^25.3.0",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_user_agent": "yarn/1.22.4 npm/? node/v12.16.3 linux x64",
+    "XDG_SEAT": "seat0",
+    "npm_config_bin_links": "true",
+    "XDG_SESSION_TYPE": "x11",
+    "SSH_AGENT_PID": "2388",
+    "npm_node_execpath": "/home/manuki/.nvm/versions/node/v12.16.3/bin/node",
+    "npm_config_init_version": "1.0.0",
+    "SHLVL": "1",
+    "npm_package_devDependencies_eslint_import_resolver_typescript": "^2.0.0",
+    "npm_package_devDependencies__types_express": "4.17.3",
+    "HOME": "/home/manuki",
+    "OLDPWD": "/home/manuki/Documentos/projetos/DotA2",
+    "LESS": "-R",
+    "npm_package_devDependencies__typescript_eslint_parser": "^2.27.0",
+    "DESKTOP_SESSION": "xfce",
+    "NVM_BIN": "/home/manuki/.nvm/versions/node/v12.16.3/bin",
+    "npm_package_devDependencies_eslint_config_prettier": "^6.10.1",
+    "PANEL_GDK_CORE_DEVICE_EVENTS": "0",
+    "ZSH": "/home/manuki/.oh-my-zsh",
+    "NVM_INC": "/home/manuki/.nvm/versions/node/v12.16.3/include/node",
+    "LSCOLORS": "Gxfxcxdxbxegedabagacad",
+    "npm_config_init_license": "MIT",
+    "XDG_SEAT_PATH": "/org/freedesktop/DisplayManager/Seat0",
+    "GTK_MODULES": "gail:atk-bridge",
+    "PAGER": "less",
+    "YARN_WRAP_OUTPUT": "false",
+    "npm_package_devDependencies__types_multer": "^1.4.2",
+    "npm_package_dependencies_csv_parse": "^4.8.8",
+    "npm_config_version_tag_prefix": "v",
+    "npm_package_dependencies_reflect_metadata": "^0.1.13",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "npm_package_dependencies_dotenv": "^8.2.0",
+    "npm_package_scripts_typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "COLORTERM": "truecolor",
+    "npm_package_devDependencies_typescript": "^3.8.3",
+    "NVM_DIR": "/home/manuki/.nvm",
+    "npm_package_dependencies_express_async_errors": "^3.1.1",
+    "MANDATORY_PATH": "/usr/share/gconf/xfce.mandatory.path",
+    "QT_QPA_PLATFORMTHEME": "qt5ct",
+    "npm_package_devDependencies_prettier": "^2.0.4",
+    "LOGNAME": "manuki",
+    "npm_package_devDependencies_eslint_plugin_import": "^2.20.1",
+    "WINDOWID": "46137347",
+    "_": "/usr/bin/yarn",
+    "npm_package_devDependencies_ts_jest": "^25.3.1",
+    "npm_package_devDependencies__types_jest": "^25.2.1",
+    "npm_package_dependencies_express": "^4.17.1",
+    "DEFAULTS_PATH": "/usr/share/gconf/xfce.default.path",
+    "npm_package_devDependencies__typescript_eslint_eslint_plugin": "^2.27.0",
+    "npm_package_devDependencies__types_cors": "^2.8.7",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "XDG_SESSION_ID": "c2",
+    "CLUTTER_BACKEND": "x11",
+    "TERM": "xterm-256color",
+    "npm_package_scripts_start": "ts-node src/index.ts",
+    "npm_config_ignore_scripts": "",
+    "npm_package_dependencies_multer": "^1.4.2",
+    "npm_package_dependencies_axios": "^0.19.2",
+    "PATH": "/tmp/yarn--1597775582197-0.9423746845549403:/home/manuki/Documentos/projetos/DotA2/node/node_modules/.bin:/home/manuki/.config/yarn/link/node_modules/.bin:/home/manuki/.yarn/bin:/home/manuki/.nvm/versions/node/v12.16.3/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/manuki/.nvm/versions/node/v12.16.3/lib/node_modules/npm/bin/node-gyp-bin:/home/manuki/.nvm/versions/node/v12.16.3/bin/node_modules/npm/bin/node-gyp-bin:/home/manuki/.nvm/versions/node/v12.16.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games",
+    "NODE": "/home/manuki/.nvm/versions/node/v12.16.3/bin/node",
+    "SESSION_MANAGER": "local/manuki-pc:@/tmp/.ICE-unix/2300,unix/manuki-pc:/tmp/.ICE-unix/2300",
+    "GDM_LANG": "pt_BR",
+    "npm_package_name": "desafio-06",
+    "XDG_MENU_PREFIX": "xfce-",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "XDG_SESSION_PATH": "/org/freedesktop/DisplayManager/Session0",
+    "npm_package_devDependencies_eslint_config_airbnb_base": "^14.1.0",
+    "npm_package_dependencies_typeorm": "^0.2.24",
+    "DISPLAY": ":0.0",
+    "npm_package_dependencies__types_csv_parse": "^1.2.2",
+    "LANG": "pt_BR.UTF-8",
+    "XDG_CURRENT_DESKTOP": "XFCE",
+    "npm_package_devDependencies_ts_node_dev": "^1.0.0-pre.44",
+    "npm_package_devDependencies_eslint": "^6.8.0",
+    "XAUTHORITY": "/home/manuki/.Xauthority",
+    "XDG_SESSION_DESKTOP": "xfce",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "npm_lifecycle_script": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
+    "npm_package_devDependencies_supertest": "^4.0.2",
+    "npm_package_main": "index.js",
+    "XDG_GREETER_DATA_DIR": "/var/lib/lightdm-data/manuki",
+    "SSH_AUTH_SOCK": "/tmp/ssh-8MPEWEmMbXjk/agent.2300",
+    "npm_package_scripts_test": "cross-env NODE_ENV=test jest",
+    "npm_config_version_git_message": "v%s",
+    "SHELL": "/usr/bin/zsh",
+    "npm_lifecycle_event": "dev:server",
+    "npm_package_version": "1.0.0",
+    "GDMSESSION": "xfce",
+    "QT_ACCESSIBILITY": "1",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"dev:server\"],\"original\":[\"dev:server\"]}",
+    "npm_package_dependencies_cors": "^2.8.5",
+    "npm_package_scripts_build": "tsc",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_git_sign": "",
+    "npm_package_scripts_dev_server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
+    "npm_package_license": "MIT",
+    "npm_config_strict_ssl": "true",
+    "XDG_VTNR": "7",
+    "SPACESHIP_VERSION": "3.11.2",
+    "npm_package_devDependencies_eslint_plugin_prettier": "^3.1.2",
+    "PWD": "/home/manuki/Documentos/projetos/DotA2/node",
+    "npm_execpath": "/usr/share/yarn/bin/yarn.js",
+    "XDG_CONFIG_DIRS": "/etc/xdg/xdg-xfce:/etc/xdg:/etc/xdg",
+    "XDG_DATA_DIRS": "/usr/share/xfce4:/home/manuki/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share",
+    "NVM_CD_FLAGS": "-q",
+    "npm_package_devDependencies_cross_env": "^7.0.2",
+    "npm_config_save_prefix": "^",
+    "npm_config_ignore_optional": "",
+    "VTE_VERSION": "5202",
+    "INIT_CWD": "/home/manuki/Documentos/projetos/DotA2/node",
+    "npm_package_dependencies_pg": "^8.0.0",
+    "NODE_ENV": "development"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 16777216,
+      "hard": 16777216
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 1048576,
+      "hard": 1048576
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 31440,
+      "hard": 31440
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2",
+    "/lib/x86_64-linux-gnu/libnss_files.so.2",
+    "/lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2",
+    "/lib/x86_64-linux-gnu/libnss_dns.so.2",
+    "/lib/x86_64-linux-gnu/libresolv.so.2"
+  ]
+}
