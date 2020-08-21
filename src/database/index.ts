@@ -11,3 +11,5 @@ export default async (name = 'default'): Promise<Connection> => {
     }),
   );
 };
+
+// configs at --> ormconfig.json

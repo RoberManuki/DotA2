@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const api = axios.create({
+const apiSteam = axios.create({
   baseURL: 'https://api.steampowered.com',
 });
 
-export default api;
+export default apiSteam;

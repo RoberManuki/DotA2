@@ -18,16 +18,16 @@ class CreateMatchService {
     const matchRepository = getRepository(Match);
 
     const matchExists = await matchRepository.findOne({ where: { match_id } });
-    if (matchExists) {
-      throw new AppError('This match exists yet', 401);
+    if (!matchExists) {
+      const match = matchRepository.create({
+        match_id,
+      });
+
+      await matchRepository.save(match);
+
+      return match;
     }
-    const match = matchRepository.create({
-      match_id,
-    });
-
-    await matchRepository.save(match);
-
-    return match;
+    throw new AppError('This match already exists in database', 401);
   }
 }
 
