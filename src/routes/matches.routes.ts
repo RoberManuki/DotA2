@@ -11,18 +11,10 @@ import Match from '../models/Match';
 //= ===========================================================================>
 // Interfaces
 interface SteamDTO {
-  data: {
-    result: {
-      matches: Array<{
-        match_id: number;
-        players: Array<{
-          account_id: number;
-          player_slot: number;
-          hero_id: number;
-        }>;
-      }>;
-    };
-  };
+  data: Array<{
+    match_id: number;
+    hero_id: number;
+  }>;
 }
 
 interface OpenDotoDTO {
@@ -34,7 +26,6 @@ interface OpenDotoDTO {
     first_blood_time: number;
     game_mode: number;
     human_players: number;
-    lobby_type: number;
     negative_votes: number;
     positive_votes: number;
     radiant_score: number;
@@ -42,6 +33,8 @@ interface OpenDotoDTO {
     start_time: number;
     tower_status_dire: number;
     tower_status_radiant: number;
+    patch: number;
+    replay_url: string;
     players: Array<{
       match_id: number;
       player_slot: number;
@@ -102,8 +95,6 @@ interface OpenDotoDTO {
       radiant_win: boolean;
       start_time: number;
       duration: number;
-      lobby_type: number;
-      game_mode: number;
       region: number;
       isRadiant: boolean;
       win: number;
@@ -113,7 +104,6 @@ interface OpenDotoDTO {
       abandons: number;
       rank_tier: number;
     }>;
-    region: number;
   };
 }
 
@@ -129,19 +119,35 @@ const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 // ?matches_requested=1&key=<key> --> 1 match
 // GET --> get 30 match ids per account key and save in database
 matchesRouter.get('/', async (request, response) => {
-  const { data }: SteamDTO = await apiSteam.get(
-    `/IDOTA2Match_570/GetMatchHistory/V001/?matches_requested=30&key=${key}`,
+  const { account_id } = request.body;
+  // get match_ids and hero_ids
+  const { data }: SteamDTO = await apiOpenDoto.get(
+    `/players/${account_id}/recentMatches`,
   );
-  const { matches } = data.result;
 
-  matches.map(async match => {
-    const { match_id } = match;
+  // for each 'match' -> request.apiOpenDoto.${match_id} -> match details
+  data.map(async match => {
+    const { match_id, hero_id } = match;
+
+    const { data }: OpenDotoDTO = await apiOpenDoto.get(
+      `/matches/${match.match_id}?api_key=${key}`,
+    );
+    const { dire_score, radiant_score, replay_url, game_mode, duration } = data;
     const createMatch = new CreateMatchService();
     // eslint-disable-next-line no-await-in-loop
-    await createMatch.execute({ match_id });
+    await createMatch.execute({
+      match_id,
+      hero_id,
+      duration,
+      game_mode,
+      radiant_score,
+      dire_score,
+      replay_url,
+    });
   });
 
-  return response.json(matches.length);
+  console.log(data.length);
+  return response.json(data);
 });
 
 //= ===========================================================================>
@@ -156,12 +162,16 @@ matchesRouter.get(`/matches`, async (request, response) => {
   });
 
   idsArray.map(async match => {
-    const { data }: OpenDotoDTO = await apiOpenDoto.get(
-      `/matches/${match.match_id}?api_key=${key}`,
-    );
     // log aleatório
+    // eslint-disable-next-line no-console
     console.log(data.players.map(player => player.personaname));
   });
+
+  // const id = 5582492667;
+
+  // const { data }: OpenDotoDTO = await apiOpenDoto.get(
+  //   `/matches/${id}?api_key=${key}`,
+  // );
 
   // pegar ids (api steam) -> ok
   // fazer chamadas com os ids (api openDoto) -> ok
@@ -169,7 +179,7 @@ matchesRouter.get(`/matches`, async (request, response) => {
   // processar/gerar novos dados -> X
   // mostrar os dados via web (react) -> X
   // mostrar os dados via mobile (react native) -> X
-  return response.json();
+  return response.json(data);
 });
 
 //= ===========================================================================>
