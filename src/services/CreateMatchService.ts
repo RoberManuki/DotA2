@@ -28,26 +28,29 @@ class CreateMatchService {
     radiant_score,
     dire_score,
     replay_url,
-  }: MatchCreation): Promise<Match> {
+  }: MatchCreation): Promise<void> {
     const matchRepository = getRepository(Match);
 
-    const matchExists = await matchRepository.findOne({ where: { match_id } });
-    if (!matchExists) {
-      const match = matchRepository.create({
-        match_id,
-        hero_id,
-        duration,
-        game_mode,
-        radiant_score,
-        dire_score,
-        replay_url,
+    try {
+      const matchExists = await matchRepository.findOne({
+        where: { match_id },
       });
+      if (!matchExists) {
+        const match = matchRepository.create({
+          match_id,
+          hero_id,
+          duration,
+          game_mode,
+          radiant_score,
+          dire_score,
+          replay_url,
+        });
 
-      await matchRepository.save(match);
-
-      return match;
+        await matchRepository.save(match);
+      }
+    } catch {
+      throw new AppError('This match already exists in database', 401);
     }
-    throw new AppError('This match already exists in database', 401);
   }
 }
 

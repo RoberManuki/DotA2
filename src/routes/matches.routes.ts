@@ -1,16 +1,17 @@
 //= ===========================================================================>
 // Imports
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
+// import { getRepository } from 'typeorm';
 
 import CreateMatchService from '../services/CreateMatchService';
-import apiSteam from '../services/apiSteam';
+import CreatePDetailService from '../services/CreatePDetailService';
+// import apiSteam from '../services/apiSteam';
 import apiOpenDoto from '../services/apiOpenDoto';
-import Match from '../models/Match';
+// import Match from '../models/Match';
 
 //= ===========================================================================>
 // Interfaces
-interface SteamDTO {
+interface RequestDTO {
   data: Array<{
     match_id: number;
     hero_id: number;
@@ -121,7 +122,7 @@ const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 matchesRouter.get('/', async (request, response) => {
   const { account_id } = request.body;
   // get match_ids and hero_ids
-  const { data }: SteamDTO = await apiOpenDoto.get(
+  const { data }: RequestDTO = await apiOpenDoto.get(
     `/players/${account_id}/recentMatches`,
   );
 
@@ -144,41 +145,37 @@ matchesRouter.get('/', async (request, response) => {
       dire_score,
       replay_url,
     });
+
+    // JUNTAR EM UMA TABELA SÓ ???
+
+    data.players.map(async player => {
+      if (player.match_id === match_id && player.hero_id === hero_id) {
+        const createPDetail = new CreatePDetailService();
+        // eslint-disable-next-line no-await-in-loop
+        await createPDetail.execute({
+          match_id: player.match_id,
+          hero_id: player.hero_id,
+          assists: player.assists,
+          camps_stacked: player.camps_stacked,
+          damage: player.damage,
+          deaths: player.deaths,
+          denies: player.denies,
+          gold: player.gold,
+          gold_per_min: player.gold_per_min,
+          xp_per_min: player.xp_per_min,
+          hero_damage: player.hero_damage,
+          kills: player.kills,
+          obs_placed: player.obs_placed,
+          sen_placed: player.sen_placed,
+          tower_damage: player.tower_damage,
+          win: player.win,
+          personaname: player.personaname,
+          // kda, ??
+        });
+      }
+    });
   });
 
-  console.log(data.length);
-  return response.json(data);
-});
-
-//= ===========================================================================>
-// api link --> Open Doto
-// https://api.opendota.com/api/matches/271145478?api_key=YOUR-API-KEY
-// GET --> get 50 match ids per account key and save in database
-matchesRouter.get(`/matches`, async (request, response) => {
-  const idRepository = getRepository(Match);
-
-  const idsArray = await idRepository.find({
-    take: 30,
-  });
-
-  idsArray.map(async match => {
-    // log aleatório
-    // eslint-disable-next-line no-console
-    console.log(data.players.map(player => player.personaname));
-  });
-
-  // const id = 5582492667;
-
-  // const { data }: OpenDotoDTO = await apiOpenDoto.get(
-  //   `/matches/${id}?api_key=${key}`,
-  // );
-
-  // pegar ids (api steam) -> ok
-  // fazer chamadas com os ids (api openDoto) -> ok
-  // analisar o que pode ser feito com os dados disponíveis -> X
-  // processar/gerar novos dados -> X
-  // mostrar os dados via web (react) -> X
-  // mostrar os dados via mobile (react native) -> X
   return response.json(data);
 });
 
