@@ -4,7 +4,7 @@ import { Router } from 'express';
 // import { getRepository } from 'typeorm';
 
 import CreateMatchService from '../services/CreateMatchService';
-import CreatePDetailService from '../services/CreatePDetailService';
+// import CreatePDetailService from '../services/CreatePDetailService';
 // import apiSteam from '../services/apiSteam';
 import apiOpenDoto from '../services/apiOpenDoto';
 // import Match from '../models/Match';
@@ -115,13 +115,9 @@ const matchesRouter = Router();
 const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 
 //= ===========================================================================>
-// api link --> Steam
-// https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/
-// ?matches_requested=1&key=<key> --> 1 match
-// GET --> get 30 match ids per account key and save in database
 matchesRouter.get('/', async (request, response) => {
   const { account_id } = request.body;
-  // get match_ids and hero_ids
+  // get 20 first match_ids and hero_ids
   const { data }: RequestDTO = await apiOpenDoto.get(
     `/players/${account_id}/recentMatches`,
   );
@@ -130,31 +126,24 @@ matchesRouter.get('/', async (request, response) => {
   data.map(async match => {
     const { match_id, hero_id } = match;
 
+    // eslint-disable-next-line no-shadow
     const { data }: OpenDotoDTO = await apiOpenDoto.get(
       `/matches/${match.match_id}?api_key=${key}`,
     );
     const { dire_score, radiant_score, replay_url, game_mode, duration } = data;
-    const createMatch = new CreateMatchService();
-    // eslint-disable-next-line no-await-in-loop
-    await createMatch.execute({
-      match_id,
-      hero_id,
-      duration,
-      game_mode,
-      radiant_score,
-      dire_score,
-      replay_url,
-    });
-
-    // JUNTAR EM UMA TABELA SÓ ???
 
     data.players.map(async player => {
       if (player.match_id === match_id && player.hero_id === hero_id) {
-        const createPDetail = new CreatePDetailService();
+        const createMatch = new CreateMatchService();
         // eslint-disable-next-line no-await-in-loop
-        await createPDetail.execute({
-          match_id: player.match_id,
-          hero_id: player.hero_id,
+        await createMatch.execute({
+          match_id,
+          hero_id,
+          duration,
+          game_mode,
+          radiant_score,
+          dire_score,
+          replay_url,
           assists: player.assists,
           camps_stacked: player.camps_stacked,
           damage: player.damage,
@@ -170,7 +159,6 @@ matchesRouter.get('/', async (request, response) => {
           tower_damage: player.tower_damage,
           win: player.win,
           personaname: player.personaname,
-          // kda, ??
         });
       }
     });
@@ -180,5 +168,27 @@ matchesRouter.get('/', async (request, response) => {
 });
 
 //= ===========================================================================>
+// const createPDetail = new CreatePDetailService();
+// // eslint-disable-next-line no-await-in-loop
+// await createPDetail.execute({
+//   match_id: player.match_id,
+//   hero_id: player.hero_id,
+//   assists: player.assists,
+//   camps_stacked: player.camps_stacked,
+//   damage: player.damage,
+//   deaths: player.deaths,
+//   denies: player.denies,
+//   gold: player.gold,
+//   gold_per_min: player.gold_per_min,
+//   xp_per_min: player.xp_per_min,
+//   hero_damage: player.hero_damage,
+//   kills: player.kills,
+//   obs_placed: player.obs_placed,
+//   sen_placed: player.sen_placed,
+//   tower_damage: player.tower_damage,
+//   win: player.win,
+//   personaname: player.personaname,
+//   // kda, ??
+// });
 
 export default matchesRouter;

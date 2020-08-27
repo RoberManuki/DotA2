@@ -20,27 +20,102 @@ export default class CreateMatches1598380264484 implements MigrationInterface {
           {
             name: 'duration',
             type: 'decimal',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'game_mode',
             type: 'decimal',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'radiant_score',
             type: 'decimal',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'dire_score',
             type: 'decimal',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'replay_url',
             type: 'varchar',
-            isNullable: false,
+            isNullable: true,
+          },
+          {
+            name: 'kills',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'deaths',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'assists',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'denies',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'damage',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'hero_damage',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'tower_damage',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'camps_stacked',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'gold',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'gold_per_min',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'xp_per_min',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'obs_placed',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'sen_placed',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'win',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
+            name: 'personaname',
+            type: 'varchar',
+            isNullable: true,
           },
         ],
       }),

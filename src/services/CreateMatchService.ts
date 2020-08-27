@@ -1,12 +1,14 @@
 //= ===========================================================================>
 // Imports
 import { getRepository } from 'typeorm';
-import AppError from '../errors/AppError';
+// import AppError from '../errors/AppError';
 
 import Match from '../models/Match';
 
 //= ===========================================================================>
 // Interfaces
+
+// Match props from a specific ${hero_id}
 interface MatchCreation {
   match_id: number;
   hero_id: number;
@@ -15,10 +17,24 @@ interface MatchCreation {
   radiant_score: number;
   dire_score: number;
   replay_url: string;
+  assists: number;
+  camps_stacked: number;
+  damage: number;
+  deaths: number;
+  denies: number;
+  gold: number;
+  gold_per_min: number;
+  xp_per_min: number;
+  hero_damage: number;
+  kills: number;
+  obs_placed: number;
+  sen_placed: number;
+  tower_damage: number;
+  win: number;
+  personaname: string;
 }
 
 //= ===========================================================================>
-// Saving a match id
 class CreateMatchService {
   public async execute({
     match_id,
@@ -28,28 +44,54 @@ class CreateMatchService {
     radiant_score,
     dire_score,
     replay_url,
+    assists,
+    camps_stacked,
+    damage,
+    deaths,
+    denies,
+    gold,
+    gold_per_min,
+    xp_per_min,
+    hero_damage,
+    kills,
+    obs_placed,
+    sen_placed,
+    tower_damage,
+    win,
+    personaname,
   }: MatchCreation): Promise<void> {
     const matchRepository = getRepository(Match);
 
-    try {
-      const matchExists = await matchRepository.findOne({
-        where: { match_id },
+    // If already exists a match with this ${match_id} -> Don't create another
+    const matchExists = await matchRepository.findOne({
+      where: { match_id },
+    });
+    if (!matchExists) {
+      const match = matchRepository.create({
+        match_id,
+        hero_id,
+        duration,
+        game_mode,
+        radiant_score,
+        dire_score,
+        replay_url,
+        assists,
+        camps_stacked,
+        damage,
+        deaths,
+        denies,
+        gold,
+        gold_per_min,
+        xp_per_min,
+        hero_damage,
+        kills,
+        obs_placed,
+        sen_placed,
+        tower_damage,
+        win,
+        personaname,
       });
-      if (!matchExists) {
-        const match = matchRepository.create({
-          match_id,
-          hero_id,
-          duration,
-          game_mode,
-          radiant_score,
-          dire_score,
-          replay_url,
-        });
-
-        await matchRepository.save(match);
-      }
-    } catch {
-      throw new AppError('This match already exists in database', 401);
+      await matchRepository.save(match);
     }
   }
 }
