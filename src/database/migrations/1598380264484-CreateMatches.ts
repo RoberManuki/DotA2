@@ -63,11 +63,6 @@ export default class CreateMatches1598380264484 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'damage',
-            type: 'decimal',
-            isNullable: true,
-          },
-          {
             name: 'hero_damage',
             type: 'decimal',
             isNullable: true,

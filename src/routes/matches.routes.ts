@@ -48,7 +48,6 @@ interface OpenDotoDTO {
       backpack_3: number;
       camps_stacked: number;
       creeps_stacked: number;
-      damage: number;
       damage_inflictor: number;
       damage_inflictor_received: number;
       damage_taken: number;
@@ -112,6 +111,7 @@ interface OpenDotoDTO {
 // Router instance
 const matchesRouter = Router();
 
+// Steam key
 const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 
 //= ===========================================================================>
@@ -126,12 +126,18 @@ matchesRouter.get('/', async (request, response) => {
   data.map(async match => {
     const { match_id, hero_id } = match;
 
+    // { match.props, match.players[] } = response.apiOpenDoto;
     // eslint-disable-next-line no-shadow
     const { data }: OpenDotoDTO = await apiOpenDoto.get(
       `/matches/${match.match_id}?api_key=${key}`,
     );
+
+    // match.props
     const { dire_score, radiant_score, replay_url, game_mode, duration } = data;
 
+    // match.players[]
+    // for each match.player -> compare hero_id
+    // hero_id found -> get match.players.props
     data.players.map(async player => {
       if (player.match_id === match_id && player.hero_id === hero_id) {
         const createMatch = new CreateMatchService();
@@ -146,7 +152,6 @@ matchesRouter.get('/', async (request, response) => {
           replay_url,
           assists: player.assists,
           camps_stacked: player.camps_stacked,
-          damage: player.damage,
           deaths: player.deaths,
           denies: player.denies,
           gold: player.gold,
@@ -168,27 +173,5 @@ matchesRouter.get('/', async (request, response) => {
 });
 
 //= ===========================================================================>
-// const createPDetail = new CreatePDetailService();
-// // eslint-disable-next-line no-await-in-loop
-// await createPDetail.execute({
-//   match_id: player.match_id,
-//   hero_id: player.hero_id,
-//   assists: player.assists,
-//   camps_stacked: player.camps_stacked,
-//   damage: player.damage,
-//   deaths: player.deaths,
-//   denies: player.denies,
-//   gold: player.gold,
-//   gold_per_min: player.gold_per_min,
-//   xp_per_min: player.xp_per_min,
-//   hero_damage: player.hero_damage,
-//   kills: player.kills,
-//   obs_placed: player.obs_placed,
-//   sen_placed: player.sen_placed,
-//   tower_damage: player.tower_damage,
-//   win: player.win,
-//   personaname: player.personaname,
-//   // kda, ??
-// });
 
 export default matchesRouter;

@@ -1,7 +1,7 @@
 //= ===========================================================================>
 // Imports
 import { getRepository } from 'typeorm';
-// import AppError from '../errors/AppError';
+import AppError from '../errors/AppError';
 
 import Match from '../models/Match';
 
@@ -19,7 +19,6 @@ interface MatchCreation {
   replay_url: string;
   assists: number;
   camps_stacked: number;
-  damage: number;
   deaths: number;
   denies: number;
   gold: number;
@@ -46,7 +45,6 @@ class CreateMatchService {
     replay_url,
     assists,
     camps_stacked,
-    damage,
     deaths,
     denies,
     gold,
@@ -77,7 +75,6 @@ class CreateMatchService {
         replay_url,
         assists,
         camps_stacked,
-        damage,
         deaths,
         denies,
         gold,
@@ -92,6 +89,9 @@ class CreateMatchService {
         personaname,
       });
       await matchRepository.save(match);
+    } else {
+      console.log('?');
+      throw new AppError('Match in database yet!', 401);
     }
   }
 }

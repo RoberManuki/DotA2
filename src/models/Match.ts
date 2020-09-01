@@ -22,7 +22,7 @@ class Match {
   hero_id: number;
 
   // --------------------------------------------------->
-  // Match props
+  // Match.props
   @Column()
   duration: number;
 
@@ -39,13 +39,10 @@ class Match {
   replay_url: string;
 
   // --------------------------------------------------->
-  // Players[] details
+  // Players[x].details
 
   @Column()
   camps_stacked: number;
-
-  @Column()
-  damage: number;
 
   @Column()
   kills: number;
