@@ -21,6 +21,7 @@ interface MatchCreation {
   camps_stacked: number;
   deaths: number;
   denies: number;
+  lane_role: number;
   gold: number;
   gold_per_min: number;
   xp_per_min: number;
@@ -47,6 +48,7 @@ class CreateMatchService {
     camps_stacked,
     deaths,
     denies,
+    lane_role,
     gold,
     gold_per_min,
     xp_per_min,
@@ -59,39 +61,42 @@ class CreateMatchService {
     personaname,
   }: MatchCreation): Promise<void> {
     const matchRepository = getRepository(Match);
-
-    // If already exists a match with this ${match_id} -> Don't create another
-    const matchExists = await matchRepository.findOne({
-      where: { match_id },
-    });
-    if (!matchExists) {
-      const match = matchRepository.create({
-        match_id,
-        hero_id,
-        duration,
-        game_mode,
-        radiant_score,
-        dire_score,
-        replay_url,
-        assists,
-        camps_stacked,
-        deaths,
-        denies,
-        gold,
-        gold_per_min,
-        xp_per_min,
-        hero_damage,
-        kills,
-        obs_placed,
-        sen_placed,
-        tower_damage,
-        win,
-        personaname,
+    try {
+      // If already exists a match with this ${match_id} -> Don't create another
+      const matchExists = await matchRepository.findOne({
+        where: { match_id },
       });
-      await matchRepository.save(match);
-    } else {
-      console.log('?');
-      throw new AppError('Match in database yet!', 401);
+      if (!matchExists) {
+        const match = matchRepository.create({
+          match_id,
+          hero_id,
+          duration,
+          game_mode,
+          radiant_score,
+          dire_score,
+          replay_url,
+          assists,
+          camps_stacked,
+          deaths,
+          denies,
+          lane_role,
+          gold,
+          gold_per_min,
+          xp_per_min,
+          hero_damage,
+          kills,
+          obs_placed,
+          sen_placed,
+          tower_damage,
+          win,
+          personaname,
+        });
+        await matchRepository.save(match);
+      } else {
+        console.log('Error -> Do not repeat matches in database!');
+      }
+    } catch {
+      throw new AppError('Error at creation service -> 401?', 401);
     }
   }
 }

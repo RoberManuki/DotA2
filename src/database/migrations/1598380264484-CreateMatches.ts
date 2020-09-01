@@ -78,6 +78,11 @@ export default class CreateMatches1598380264484 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'lane_role',
+            type: 'decimal',
+            isNullable: true,
+          },
+          {
             name: 'gold',
             type: 'decimal',
             isNullable: true,

@@ -70,7 +70,7 @@ interface OpenDotoDTO {
       killed: number;
       killed_by: number;
       kills: number;
-      lane_pos: number;
+      lane_role: number;
       last_hits: number;
       leaver_status: number;
       level: number;
@@ -154,6 +154,7 @@ matchesRouter.get('/', async (request, response) => {
           camps_stacked: player.camps_stacked,
           deaths: player.deaths,
           denies: player.denies,
+          lane_role: player.lane_role,
           gold: player.gold,
           gold_per_min: player.gold_per_min,
           xp_per_min: player.xp_per_min,

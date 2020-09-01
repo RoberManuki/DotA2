@@ -48,6 +48,9 @@ class Match {
   kills: number;
 
   @Column()
+  lane_role: number;
+
+  @Column()
   deaths: number;
 
   @Column()
