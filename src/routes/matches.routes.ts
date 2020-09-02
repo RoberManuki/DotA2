@@ -1,9 +1,10 @@
 //= ===========================================================================>
 // Imports
-import { Router } from 'express';
+import { Router, response } from 'express';
 // import { getRepository } from 'typeorm';
 
 import CreateMatchService from '../services/CreateMatchService';
+import ProcessDataService from '../services/ProcessDataService';
 // import CreatePDetailService from '../services/CreatePDetailService';
 // import apiSteam from '../services/apiSteam';
 import apiOpenDoto from '../services/apiOpenDoto';
@@ -115,7 +116,7 @@ const matchesRouter = Router();
 const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 
 //= ===========================================================================>
-matchesRouter.get('/', async (request, response) => {
+matchesRouter.get('/', async (request, _response) => {
   const { account_id } = request.body;
   // get 20 first match_ids and hero_ids
   const { data }: RequestDTO = await apiOpenDoto.get(
@@ -171,6 +172,17 @@ matchesRouter.get('/', async (request, response) => {
   });
 
   return response.json(data);
+});
+
+//= ===========================================================================>
+// eslint-disable-next-line no-shadow
+matchesRouter.get('/dashboard', async (_request, response) => {
+  const processData = new ProcessDataService();
+  const data = await processData.execute();
+
+  console.log(data);
+
+  return response.json(data.wins);
 });
 
 //= ===========================================================================>

@@ -4,6 +4,6 @@ import matchesRouter from './matches.routes';
 
 const routes = Router();
 
-routes.use('/data', matchesRouter);
+routes.use('/matches', matchesRouter);
 
 export default routes;

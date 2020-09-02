@@ -92,8 +92,6 @@ class CreateMatchService {
           personaname,
         });
         await matchRepository.save(match);
-      } else {
-        console.log('Error -> Do not repeat matches in database!');
       }
     } catch {
       throw new AppError('Error at creation service -> 401?', 401);
