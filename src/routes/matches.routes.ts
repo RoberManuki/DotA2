@@ -114,8 +114,11 @@ const matchesRouter = Router();
 
 // Steam key
 const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
+// const key2 = '3A09438BC52B5126DD9252C36AA3D3DA';
+// const key3 = '2673759BBC000BC076494BE824612D61';
 
 //= ===========================================================================>
+// get matches info and save into database --> steam key
 matchesRouter.get('/', async (request, _response) => {
   const { account_id } = request.body;
   // get 20 first match_ids and hero_ids
@@ -171,7 +174,7 @@ matchesRouter.get('/', async (request, _response) => {
     });
   });
 
-  return response.json(data);
+  return _response.json(data);
 });
 
 //= ===========================================================================>
@@ -180,9 +183,7 @@ matchesRouter.get('/dashboard', async (_request, response) => {
   const processData = new ProcessDataService();
   const data = await processData.execute();
 
-  console.log(data);
-
-  return response.json(data.wins);
+  return response.json(data);
 });
 
 //= ===========================================================================>
