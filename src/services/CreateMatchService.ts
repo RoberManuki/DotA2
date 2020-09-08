@@ -1,14 +1,10 @@
 //= ===========================================================================>
-// Imports
 import { getRepository } from 'typeorm';
 import AppError from '../errors/AppError';
 
 import Match from '../models/Match';
 
 //= ===========================================================================>
-// Interfaces
-
-// Match props from a specific ${hero_id}
 interface MatchCreation {
   match_id: number;
   hero_id: number;
@@ -62,7 +58,6 @@ class CreateMatchService {
   }: MatchCreation): Promise<void> {
     const matchRepository = getRepository(Match);
     try {
-      // If already exists a match with this ${match_id} -> Don't create another
       const matchExists = await matchRepository.findOne({
         where: { match_id },
       });

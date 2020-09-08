@@ -113,12 +113,12 @@ const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 // get matches info and save into database --> steam key
 matchesRouter.get('/', async (request, _response) => {
   const { account_id } = request.body;
-  // get 20 first match_ids and hero_ids
+  // get 20 first matches
   const { data }: RequestDTO = await apiOpenDoto.get(
     `/players/${account_id}/recentMatches`,
   );
 
-  // for each 'match' -> {}
+  // for each 'match' ->
   data.map(async match => {
     const { match_id, hero_id } = match;
 

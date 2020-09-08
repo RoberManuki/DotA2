@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 
 import Match from '../models/Match';
 import HeroUsage from '../models/HeroUsage';
+import AppError from '../errors/AppError';
 
 //= ===========================================================================>
 interface ResponseDTO {
@@ -28,19 +29,22 @@ class ProcessDataService {
 
     const heroUsageVector: Array<HeroUsage> = [];
 
-    matchesVector.map(match => {
-      const checkHeroUsageExists = heroUsageVector.find(
-        e => e.hero_id === match.hero_id,
-      );
-      if (!checkHeroUsageExists) {
-        const heroUsage = new HeroUsage(match.hero_id);
-        heroUsageVector.push(heroUsage);
-      } else {
-        checkHeroUsageExists.times_used += 1;
-      }
-    });
-
-    return { wins, losses, picks: heroUsageVector };
+    try {
+      matchesVector.map(match => {
+        const checkHeroUsageExists = heroUsageVector.find(
+          e => e.hero_id === match.hero_id,
+        );
+        if (!checkHeroUsageExists) {
+          const heroUsage = new HeroUsage(match.hero_id);
+          heroUsageVector.push(heroUsage);
+        } else {
+          checkHeroUsageExists.times_used += 1;
+        }
+      });
+      return { wins, losses, picks: heroUsageVector };
+    } catch {
+      throw new AppError('Error at heroUsage?', 400);
+    }
   }
 }
 
