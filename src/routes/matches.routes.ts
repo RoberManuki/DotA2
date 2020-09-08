@@ -1,17 +1,11 @@
 //= ===========================================================================>
-// Imports
-import { Router, response } from 'express';
-// import { getRepository } from 'typeorm';
+import { Router } from 'express';
 
 import CreateMatchService from '../services/CreateMatchService';
 import ProcessDataService from '../services/ProcessDataService';
-// import CreatePDetailService from '../services/CreatePDetailService';
-// import apiSteam from '../services/apiSteam';
 import apiOpenDoto from '../services/apiOpenDoto';
-// import Match from '../models/Match';
 
 //= ===========================================================================>
-// Interfaces
 interface RequestDTO {
   data: Array<{
     match_id: number;
@@ -109,10 +103,8 @@ interface OpenDotoDTO {
 }
 
 //= ===========================================================================>
-// Router instance
 const matchesRouter = Router();
 
-// Steam key
 const key = '59E8F88A8E32C3A5152060D1669763C3'; // domain -> manuki
 // const key2 = '3A09438BC52B5126DD9252C36AA3D3DA';
 // const key3 = '2673759BBC000BC076494BE824612D61';
@@ -126,7 +118,7 @@ matchesRouter.get('/', async (request, _response) => {
     `/players/${account_id}/recentMatches`,
   );
 
-  // for each 'match' -> request.apiOpenDoto.${match_id} -> match details
+  // for each 'match' -> {}
   data.map(async match => {
     const { match_id, hero_id } = match;
 
@@ -141,7 +133,6 @@ matchesRouter.get('/', async (request, _response) => {
 
     // match.players[]
     // for each match.player -> compare hero_id
-    // hero_id found -> get match.players.props
     data.players.map(async player => {
       if (player.match_id === match_id && player.hero_id === hero_id) {
         const createMatch = new CreateMatchService();
