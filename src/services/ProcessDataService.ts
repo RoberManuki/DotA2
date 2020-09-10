@@ -9,6 +9,7 @@ import AppError from '../errors/AppError';
 interface ResponseDTO {
   wins: number;
   losses: number;
+  percentWins: string;
   picks: Array<HeroUsage>;
 }
 
@@ -17,7 +18,6 @@ class ProcessDataService {
   public async execute(): Promise<ResponseDTO> {
     const matchRepository = getRepository(Match);
 
-    // to do -> get % of wins
     const [winsVector, wins] = await matchRepository.findAndCount({
       where: { win: 1 },
     });
@@ -27,21 +27,25 @@ class ProcessDataService {
 
     const matchesVector = winsVector.concat(lossesVector);
 
+    const winsPercent = (wins * 100) / matchesVector.length;
+
+    const percentWins = `${winsPercent}%`;
+
     const heroUsageVector: Array<HeroUsage> = [];
 
     try {
       matchesVector.map(match => {
-        const checkHeroUsageExists = heroUsageVector.find(
+        const heroUsageExists = heroUsageVector.find(
           e => e.hero_id === match.hero_id,
         );
-        if (!checkHeroUsageExists) {
+        if (!heroUsageExists) {
           const heroUsage = new HeroUsage(match.hero_id);
           heroUsageVector.push(heroUsage);
         } else {
-          checkHeroUsageExists.times_used += 1;
+          heroUsageExists.times_used += 1;
         }
       });
-      return { wins, losses, picks: heroUsageVector };
+      return { wins, losses, percentWins, picks: heroUsageVector };
     } catch {
       throw new AppError('Error at heroUsage?', 400);
     }
